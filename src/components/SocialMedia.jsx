@@ -62,7 +62,7 @@ export function SocialMedia({ className, invert = false }) {
       role="list"
       className={clsx(
         'flex gap-x-10',
-        invert ? 'text-white' : 'text-neutral-950',
+        invert ? 'text-white' : 'text-[#e14242]',
         className,
       )}
     >

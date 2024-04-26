@@ -8,7 +8,7 @@ function Office({ name, children, invert = false }) {
         invert ? 'text-neutral-300' : 'text-neutral-600',
       )}
     >
-      <strong className={invert ? 'text-white' : 'text-neutral-950'}>
+      <strong className={invert ? 'text-white' : 'text-[#e14242]'}>
         {name}
       </strong>
       <br />
