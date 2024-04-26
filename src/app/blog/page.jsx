@@ -9,6 +9,7 @@ import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
+import { contactData } from '@/data/homepage'
 
 export const metadata = {
   title: 'Blog',
@@ -82,7 +83,7 @@ export default async function Blog() {
         </div>
       </Container>
 
-      <ContactSection />
+      <ContactSection contactData={contactData}/>
     </>
   )
 }

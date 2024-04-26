@@ -22,6 +22,7 @@ import imageLeslieAlexander from '@/images/team/leslie-alexander.jpg'
 import imageMichaelFoster from '@/images/team/michael-foster.jpg'
 import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
 import { loadArticles } from '@/lib/mdx'
+import { contactData } from '@/data/homepage'
 
 function Culture() {
   return (
@@ -227,7 +228,7 @@ export default async function About() {
         pages={blogArticles}
       />
 
-      <ContactSection />
+      <ContactSection contactData={contactData}/>
     </>
   )
 }

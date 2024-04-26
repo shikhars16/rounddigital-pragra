@@ -123,8 +123,8 @@ function Services() {
           </div>
           <List className="mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[33rem] lg:pl-4">
            
-           {servicesData?.listData && servicesData.listData.map((item) => (
-             <ListItem title={item.title}>
+           {servicesData?.listData && servicesData.listData.map((item,index) => (
+             <ListItem key={index} title={item.title}>
               {item.description}
              </ListItem>
            ))}

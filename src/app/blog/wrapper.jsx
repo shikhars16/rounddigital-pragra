@@ -3,6 +3,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { MDXComponents } from '@/components/MDXComponents'
 import { PageLinks } from '@/components/PageLinks'
+import { contactData } from '@/data/homepage'
 import { formatDate } from '@/lib/formatDate'
 import { loadArticles } from '@/lib/mdx'
 
@@ -47,7 +48,7 @@ export default async function BlogArticleWrapper({ article, children }) {
         />
       )}
 
-      <ContactSection />
+      <ContactSection contactData={contactData}/>
     </>
   )
 }

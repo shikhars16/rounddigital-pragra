@@ -21,8 +21,8 @@ export function Offices({ invert = false, officeData, ...props }) {
   return (
     <ul role="list" {...props}>
       {
-        officeData && officeData.map((item) =>(
-          <li>
+        officeData && officeData.map((item, index) =>(
+          <li key={index}>
         <Office name={item.name} invert={invert}>
          {item.address1}
           <br />

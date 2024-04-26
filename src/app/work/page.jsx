@@ -19,6 +19,7 @@ import logoPhobia from '@/images/clients/phobia/logo-dark.svg'
 import logoUnseal from '@/images/clients/unseal/logo-dark.svg'
 import { formatDate } from '@/lib/formatDate'
 import { loadCaseStudies } from '@/lib/mdx'
+import { contactData } from '@/data/homepage'
 
 function CaseStudies({ caseStudies }) {
   return (
@@ -165,7 +166,7 @@ export default async function Work() {
 
       <Clients />
 
-      <ContactSection />
+      <ContactSection contactData={contactData}/>
     </>
   )
 }
