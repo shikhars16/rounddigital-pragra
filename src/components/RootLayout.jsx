@@ -59,19 +59,20 @@ function Header({
           onMouseEnter={() => setLogoHovered(true)}
           onMouseLeave={() => setLogoHovered(false)}
         >
-          <Logomark
+          {/* <Logomark
             className="h-8 sm:hidden"
             invert={invert}
             filled={logoHovered}
-          />
+          /> */}
           <Logo
             className="hidden h-8 sm:block"
             invert={invert}
             filled={logoHovered}
+            logoboolean={expanded}
           />
         </Link>
         <div className="flex items-center gap-x-8">
-          <Button href="/contact" invert={invert}>
+          <Button className="hidden md:block" href="/contact" invert={invert}>
             Contact us
           </Button>
           <button
@@ -139,6 +140,9 @@ function Navigation() {
 }
 
 function RootLayoutInner({ children }) {
+
+
+
   let panelId = useId()
   let [expanded, setExpanded] = useState(false)
   let openRef = useRef(null)
