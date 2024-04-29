@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { heroData, testimonial } from '@/data/workpage'
 import { Blockquote } from '@/components/Blockquote'
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
@@ -143,15 +143,8 @@ export default async function Work() {
 
   return (
     <>
-      <PageIntro
-        eyebrow="Our work"
-        title="Proven solutions for real-world problems."
-      >
-        <p>
-          We believe in efficiency and maximizing our resources to provide the
-          best value to our clients. The primary way we do that is by re-using
-          the same five projects we’ve been developing for the past decade.
-        </p>
+      <PageIntro eyebrow={heroData.title} title={heroData.heading}>
+        <p>{heroData.Desc}</p>
       </PageIntro>
 
       <CaseStudies caseStudies={caseStudies} />
@@ -160,13 +153,12 @@ export default async function Work() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Mail Smirk', logo: logoMailSmirk }}
       >
-        We approached <em>Studio</em> because we loved their past work. They
-        delivered something remarkably similar in record time.
+        {testimonial.heading}
       </Testimonial>
 
       <Clients />
 
-      <ContactSection contactData={contactData}/>
+      <ContactSection contactData={contactData} />
     </>
   )
 }
