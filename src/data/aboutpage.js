@@ -1,7 +1,20 @@
-const heroData = {
+import imageAngelaFisher from '@/images/team/angela-fisher.jpg'
+import imageBenjaminRussel from '@/images/team/benjamin-russel.jpg'
+import imageBlakeReid from '@/images/team/blake-reid.jpg'
+import imageChelseaHagon from '@/images/team/chelsea-hagon.jpg'
+import imageDriesVincent from '@/images/team/dries-vincent.jpg'
+import imageEmmaDorsey from '@/images/team/emma-dorsey.jpg'
+import imageJeffreyWebb from '@/images/team/jeffrey-webb.jpg'
+import imageKathrynMurphy from '@/images/team/kathryn-murphy.jpg'
+import imageLeonardKrasner from '@/images/team/leonard-krasner.jpg'
+import imageLeslieAlexander from '@/images/team/leslie-alexander.jpg'
+import imageMichaelFoster from '@/images/team/michael-foster.jpg'
+import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
+
+export const heroData = {
   title: 'About us',
   heading: 'Our strength is collaboration',
-  subHeadingL:
+  subHeading:
     'We believe that our strength lies in our collaborative approach, which puts our clients at the center of everything we do.',
   DescOne:
     'Studio was started by three friends who noticed that developer studios were charging clients double what an in-house team would cost. Since the beginning, we have been committed to doing things differently by charging triple instead.',
@@ -9,7 +22,7 @@ const heroData = {
     'At Studio, we’re more than just colleagues — we’re a family. This means we pay very little and expect people to work late. We want our employees to bring their whole selves to work. In return, we just ask that they keep themselves there until at least 6:30pm.',
 }
 
-const stats = [
+export const stats = [
   {
     id: 1,
     value: 35,
@@ -27,7 +40,7 @@ const stats = [
   },
 ]
 
-const cultureData = {
+export const cultureData = {
   title: 'Our culture',
   heading: 'Balance your passion with your passion for life.',
   subHeading:
@@ -51,71 +64,87 @@ const cultureData = {
   ],
 }
 
-const leadership = {
-  title: 'Leadership',
-  data: [
-    {
-      id: 1,
-      img: '',
-      name: 'Leslie Alexander',
-      position: 'Co-Founder / CEO',
-    },
-    {
-      id: 2,
-      img: '',
-      name: 'Michael Foster',
-      position: 'Co-Founder / CTO',
-    },
-    {
-      id: 3,
-      img: '',
-      name: 'Dries Vincent',
-      position: 'Partner & Business Relations',
-    },
-  ],
-}
-
-
-const team = {
+export const teamData = [
+  {
+    title: 'Leadership',
+    data: [
+      {
+        id: 1,
+        image: { src: imageLeslieAlexander },
+        name: 'Leslie Alexander',
+        role: 'Co-Founder / CEO',
+      },
+      {
+        id: 2,
+        image: { src: imageMichaelFoster },
+        name: 'Michael Foster',
+        role: 'Co-Founder / CTO',
+      },
+      {
+        id: 3,
+        image: { src: imageDriesVincent },
+        name: 'Dries Vincent',
+        role: 'Partner & Business Relations',
+      },
+    ],
+  },
+  {
     title: 'Team',
     data: [
       {
         id: 1,
-        img: '',
+        image: { src: imageChelseaHagon },
         name: 'Chelsea Hagon',
-        position: 'Senior Developer',
+        role: 'Senior Developer',
       },
       {
         id: 2,
-        img: '',
+        image: { src: imageEmmaDorsey },
         name: 'Emma Dorsey',
-        position: 'Senior Designer',
+        role: 'Senior Designer',
       },
       {
         id: 3,
-        img: '',
+        image: { src: imageLeonardKrasner },
         name: 'Leonard Krasner',
-        position: 'VP, User Experience',
+        role: 'VP, User Experience',
       },
       {
         id: 4,
-        img: '',
+        image: { src: imageBlakeReid },
         name: 'Blake Reid',
-        position: 'Junior Copywriter',
+        role: 'Junior Copywriter',
       },
       {
         id: 5,
-        img: '',
+        image: { src: imageKathrynMurphy },
         name: 'Kathryn Murphy',
-        position: 'VP, Human Resources',
+        role: 'VP, Human Resources',
       },
       {
         id: 6,
-        img: '',
+        image: { src: imageWhitneyFrancis },
         name: 'Whitney Francis',
-        position: 'Content Specialist',
+        role: 'Content Specialist',
+      },
+      {
+        id: 7,
+        name: 'Jeffrey Webb',
+        role: 'Account Coordinator',
+        image: { src: imageJeffreyWebb },
+      },
+      {
+        id: 8,
+        name: 'Benjamin Russel',
+        role: 'Senior Developer',
+        image: { src: imageBenjaminRussel },
+      },
+      {
+        id: 9,
+        name: 'Angela Fisher',
+        role: 'Front-end Developer',
+        image: { src: imageAngelaFisher },
       },
     ],
-  }
-
-  
+  },
+]
