@@ -13,6 +13,8 @@ import logoPhobiaDark from '@/images/clients/phobia/logo-dark.svg'
 
 import imageLaptop from '@/images/laptop.jpg'
 import { loadCaseStudies } from '@/lib/mdx'
+import { client, getPosts } from '@/utils/sanity'
+// import { useEffect } from 'react'
 
 
 function Clients({clients}) {
@@ -141,8 +143,13 @@ export const metadata = {
     'We are a development studio working at the intersection of design and technology.',
 }
 
-export default async function Home() {
+export default async function Home({props}) {
   let caseStudies = (await loadCaseStudies()).slice(0, 3)
+
+
+  const clientData =await getSanityData()
+  console.log(clientData, 'client data from sanity')
+
 
   return (
     <>
@@ -173,4 +180,14 @@ export default async function Home() {
       <ContactSection contactData={contactData} />
     </>
   )
+}
+
+
+async function getSanityData() {
+  const clientData = getPosts("home")
+
+ const data = await clientData
+//  console.log(data)
+  return data;
+ 
 }
