@@ -74,7 +74,8 @@ function Team({data}) {
                             alt=""
                             width={5000}
                             height={5000}
-                            src={person?.assest?._ref}
+                            src={person.imageUrl}
+                            unoptimized
                             className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
                           />
                           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-black/0 to-40% p-6">
@@ -148,7 +149,7 @@ async function getSanityData() {
   const clientData = getPosts("about")
 
  const data = await clientData
-//  console.log(data)
+ console.log(data[0].teamDataComponent.teams[0])
   return data;
  
 }
