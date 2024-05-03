@@ -23,20 +23,21 @@ import imageMichaelFoster from '@/images/team/michael-foster.jpg'
 import imageWhitneyFrancis from '@/images/team/whitney-francis.jpg'
 import { loadArticles } from '@/lib/mdx'
 import { contactData } from '@/data/homepage'
+import { getPosts } from '@/utils/sanity'
 
-function Culture() {
+function Culture({data}) {
   return (
     <div className="mt-24 rounded-4xl bg-[#e14242] py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
-        eyebrow={cultureData.title}
-        title={cultureData.heading}
+        eyebrow={data.title}
+        title={data.heading}
         invert
       >
-        <p>{cultureData.subHeading}</p>
+        <p>{data.subHeading}</p>
       </SectionIntro>
       <Container className="mt-16">
         <GridList>
-          {cultureData.point.map((item) => (
+          {data.point.map((item) => (
             <GridListItem key={item.id} title={item.title} invert>
               {item.desc}
             </GridListItem>
@@ -47,11 +48,11 @@ function Culture() {
   )
 }
 
-function Team() {
+function Team({data}) {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <div className="space-y-24">
-        {teamData.map((group) => (
+        {data?.teams.map((group) => (
           <FadeInStagger key={group.title}>
             <Border as={FadeIn} />
             <div className="grid grid-cols-1 gap-6 pt-12 sm:pt-16 lg:grid-cols-4 xl:gap-8">
@@ -65,13 +66,15 @@ function Team() {
                   role="list"
                   className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8"
                 >
-                  {group.data.map((person) => (
+                  {group?.members?.map((person) => (
                     <li key={person.id}>
                       <FadeIn>
                         <div className="group relative overflow-hidden rounded-3xl bg-neutral-100">
                           <Image
                             alt=""
-                            src={person.image.src}
+                            width={5000}
+                            height={5000}
+                            src={person?.assest?._ref}
                             className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
                           />
                           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-black/0 to-40% p-6">
@@ -105,27 +108,29 @@ export const metadata = {
 
 export default async function About() {
   let blogArticles = (await loadArticles()).slice(0, 2)
+  const clientData =await getSanityData()
+  // console.log(clientData[0].teamDataComponent.teams[0].members[0].image, 'About data from sanity')
 
   return (
     <>
-      <PageIntro eyebrow={heroData.title} title={heroData.heading}>
-        <p>{heroData.subHeading}</p>
+      <PageIntro eyebrow={clientData[0]?.heroComponent?.title} title={clientData[0]?.heroComponent?.heading}>
+        <p>{clientData[0]?.heroComponent?.subHeading}</p>
         <div className="mt-10 max-w-2xl space-y-6 text-base">
-          <p>{heroData.DescOne}</p>
-          <p>{heroData.DescTwo}</p>
+          <p>{clientData[0]?.heroComponent?.DescOne}</p>
+          <p>{clientData[0]?.heroComponent?.DescTwo}</p>
         </div>
       </PageIntro>
       <Container className="mt-16">
         <StatList>
-          {stats.map((stat) => (
+          {clientData[0]?.statsComponent?.stats.map((stat) => (
             <StatListItem key={stat.id} value={stat.value} label={stat.desc} />
           ))}
         </StatList>
       </Container>
 
-      <Culture />
+      <Culture data={clientData[0]?.cultureDataComponent} />
 
-      <Team />
+      <Team data={clientData[0]?.teamDataComponent}/>
 
       <PageLinks
         className="mt-24 sm:mt-32 lg:mt-40"
@@ -137,4 +142,13 @@ export default async function About() {
       <ContactSection contactData={contactData} />
     </>
   )
+}
+
+async function getSanityData() {
+  const clientData = getPosts("about")
+
+ const data = await clientData
+//  console.log(data)
+  return data;
+ 
 }

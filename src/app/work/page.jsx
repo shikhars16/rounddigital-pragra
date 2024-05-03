@@ -20,6 +20,7 @@ import logoUnseal from '@/images/clients/unseal/logo-dark.svg'
 import { formatDate } from '@/lib/formatDate'
 import { loadCaseStudies } from '@/lib/mdx'
 import { contactData } from '@/data/homepage'
+import { getPosts } from '@/utils/sanity'
 
 function CaseStudies({ caseStudies }) {
   return (
@@ -140,11 +141,13 @@ export const metadata = {
 
 export default async function Work() {
   let caseStudies = await loadCaseStudies()
+  const clientData = await getSanityData()
+  
 
   return (
     <>
-      <PageIntro eyebrow={heroData.title} title={heroData.heading}>
-        <p>{heroData.Desc}</p>
+      <PageIntro eyebrow={clientData[0]?.heroDataComponent.title} title={clientData[0]?.heroDataComponent.heading}>
+        <p>{clientData[0]?.heroDataComponent.Desc}</p>
       </PageIntro>
 
       <CaseStudies caseStudies={caseStudies} />
@@ -153,7 +156,7 @@ export default async function Work() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Mail Smirk', logo: logoMailSmirk }}
       >
-        {testimonial.heading}
+        {clientData[0]?.testimonialComponent.heading}
       </Testimonial>
 
       <Clients />
@@ -161,4 +164,12 @@ export default async function Work() {
       <ContactSection contactData={contactData} />
     </>
   )
+}
+
+async function getSanityData() {
+  const clientData = getPosts('work')
+
+  const data = await clientData
+  //  console.log(data)
+  return data
 }

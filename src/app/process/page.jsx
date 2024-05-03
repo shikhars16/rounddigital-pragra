@@ -20,6 +20,7 @@ import {
 import imageLaptop from '@/images/laptop.jpg'
 import imageMeeting from '@/images/meeting.jpg'
 import imageWhiteboard from '@/images/whiteboard.jpg'
+import { getPosts } from '@/utils/sanity'
 
 function Section({ title, image, children }) {
   return (
@@ -51,21 +52,21 @@ function Section({ title, image, children }) {
   )
 }
 
-function Discover() {
+function Discover({data}) {
   return (
-    <Section title={discoverData.title} image={discoverData.image}>
+    <Section title={data.title} image={data.image}>
       <div className="space-y-6 text-base text-neutral-600">
-        <p>{discoverData.DescOne}</p>
-        <p>{discoverData.DescTwo}</p>
-        <p>{discoverData.DescThree}</p>
+        <p>{data.DescOne}</p>
+        <p>{data.DescTwo}</p>
+        <p>{data.DescThree}</p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-[#e14242]">
-        {discoverData.phase.heading}
+        {data.phase.heading}
       </h3>
       <TagList className="mt-4">
-        {discoverData?.phase?.tag &&
-          discoverData?.phase?.tag.map((item) => (
+        {data?.phase?.tag &&
+          data?.phase?.tag.map((item) => (
             <TagListItem key={item.id}>{item.point}</TagListItem>
           ))}
       </TagList>
@@ -73,40 +74,40 @@ function Discover() {
   )
 }
 
-function Build() {
+function Build({data}) {
   return (
-    <Section title={buildData.title} image={buildData.image}>
+    <Section title={data.title} image={data.image}>
       <div className="space-y-6 text-base text-neutral-600">
-        <p>{buildData.DescOne}</p>
-        <p>{buildData.DescTwo}</p>
-        <p>{buildData.DescThree}</p>
+        <p>{data.DescOne}</p>
+        <p>{data.DescTwo}</p>
+        <p>{data.DescThree}</p>
       </div>
 
       <Blockquote
-        author={{ name: buildData.author.name, role: buildData.author.role }}
+        author={{ name: data.author.name, role: data.author.role }}
         className="mt-12"
       >
-        {buildData.author.desc}
+        {data.author.desc}
       </Blockquote>
     </Section>
   )
 }
 
-function Deliver() {
+function Deliver({data}) {
   return (
-    <Section title={deliverData.title} image={deliverData.image}>
+    <Section title={data.title} image={data.image}>
       <div className="space-y-6 text-base text-neutral-600">
-        <p>{deliverData.DescOne}</p>
-        <p>{deliverData.DescTwo}</p>
-        <p>{deliverData.DescThree}</p>
+        <p>{data.DescOne}</p>
+        <p>{data.DescTwo}</p>
+        <p>{data.DescThree}</p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-[#e14242]">
-        {deliverData.phase.heading}
+        {data.phase.heading}
       </h3>
       <List className="mt-8">
-        {deliverData?.phase?.tag &&
-          deliverData?.phase?.tag.map((item) => (
+        {data?.phase?.tag &&
+          data?.phase?.tag.map((item) => (
             <ListItem key={item.id} title={item.title}>
               {item.point}
             </ListItem>
@@ -116,7 +117,7 @@ function Deliver() {
   )
 }
 
-function Values() {
+function Values({data}) {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
       {/* Assuming you have a GridPattern component */}
@@ -128,14 +129,14 @@ function Values() {
         />
       </div>
 
-      <SectionIntro eyebrow={valuesData.eyebrow} title={valuesData.title}>
-        <p>{valuesData.DescOne}</p>
+      <SectionIntro eyebrow={data.eyebrow} title={data.title}>
+        <p>{data.DescOne}</p>
       </SectionIntro>
 
       {/* Assuming you have a Container component */}
       <Container className="mt-24">
         <GridList>
-          {valuesData.phase.tag.map((item) => (
+          {data.phase.tag.map((item) => (
             <GridListItem key={item.id} title={item.title}>
               {item.point}
             </GridListItem>
@@ -152,22 +153,33 @@ export const metadata = {
     'We believe in efficiency and maximizing our resources to provide the best value to our clients.',
 }
 
-export default function Process() {
+export default async function Process() {
+  const clientData = await getSanityData()
+  console.log(clientData[0],"process data")
   return (
     <>
-      <PageIntro eyebrow={heroData.eyebrow} title={heroData.title}>
-        <p>{heroData.subHeading}</p>
+      <PageIntro eyebrow={clientData[0].heroDataComponent.eyebrow} title={clientData[0].heroDataComponent.title}>
+        <p>{clientData[0].heroDataComponent.subHeading}</p>
       </PageIntro>
 
       <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
-        <Discover />
-        <Build />
-        <Deliver />
+        <Discover data={clientData[0].discoverDataComponent} />
+        <Build data={clientData[0].buildDataComponent}/>
+        <Deliver data={clientData[0].deliverDataComponent} />
       </div>
 
-      <Values />
+      <Values data={clientData[0].valuesDataComponent} />
 
       <ContactSection contactData={contactData} />
     </>
   )
+}
+
+
+async function getSanityData() {
+  const clientData = getPosts('process')
+
+  const data = await clientData
+  //  console.log(data)
+  return data
 }
