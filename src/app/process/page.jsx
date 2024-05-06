@@ -29,7 +29,7 @@ function Section({ title, image, children }) {
         <div className="flex justify-center">
           <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
             <StylizedImage
-              {...image}
+              image={image}
               sizes="(min-width: 1024px) 41rem, 31rem"
               className="justify-center lg:justify-end lg:group-even/section:justify-start"
             />
@@ -54,7 +54,7 @@ function Section({ title, image, children }) {
 
 function Discover({data}) {
   return (
-    <Section title={data.title} image={data.image}>
+    <Section title={data.title} image={data.imageUrl}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>{data.DescOne}</p>
         <p>{data.DescTwo}</p>
@@ -76,7 +76,7 @@ function Discover({data}) {
 
 function Build({data}) {
   return (
-    <Section title={data.title} image={data.image}>
+    <Section title={data.title} image={data.imageUrl}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>{data.DescOne}</p>
         <p>{data.DescTwo}</p>
@@ -95,7 +95,7 @@ function Build({data}) {
 
 function Deliver({data}) {
   return (
-    <Section title={data.title} image={data.image}>
+    <Section title={data.title} image={data.imageUrl}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>{data.DescOne}</p>
         <p>{data.DescTwo}</p>

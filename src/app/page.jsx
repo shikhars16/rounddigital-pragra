@@ -32,10 +32,10 @@ function Clients({clients}) {
             role="list"
             className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
           >
-            {clients.clientArray && clients.clientArray.map(([client, logo]) => (
-              <li key={client}>
+            {clients?.clientsArray && clients.clientsArray.map((item) => (
+              <li key={item.key}>
                 <FadeIn>
-                  <Image src={logo} alt={client} unoptimized />
+                  <Image src={item.imageUrl} alt={item.name} unoptimized width={200} height={100}/>
                 </FadeIn>
               </li>
             ))}
@@ -148,7 +148,7 @@ export default async function Home({props}) {
 
 
   const clientData =await getSanityData()
-  console.log(clientData, 'client data from sanity')
+  // console.log(clientData, 'client data from sanity')
 
 
   return (
@@ -164,7 +164,7 @@ export default async function Home({props}) {
         </FadeIn>
       </Container>
 
-      <Clients clients={clientData}/>
+      <Clients clients={clientData[0].clients}/>
 
       <CaseStudies caseStudies={caseStudies} />
 
