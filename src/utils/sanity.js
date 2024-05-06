@@ -1,4 +1,5 @@
 import {createClient} from '@sanity/client';
+import ImageUrlBuilder from '@sanity/image-url';
 
 
 export const client = createClient({
@@ -30,4 +31,11 @@ export async function getPosts(type) {
   export async function updateDocumentTitle(_id, title) {
     const result = client.patch(_id).set({title})
     return result
+  }
+
+
+  const builder = ImageUrlBuilder(client)
+
+  export function urlFor(source){
+    return builder.image(source)
   }
