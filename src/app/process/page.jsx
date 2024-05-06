@@ -20,7 +20,7 @@ import {
 import imageLaptop from '@/images/laptop.jpg'
 import imageMeeting from '@/images/meeting.jpg'
 import imageWhiteboard from '@/images/whiteboard.jpg'
-import { getPosts } from '@/utils/sanity'
+import { getPosts, urlFor } from '@/utils/sanity'
 
 function Section({ title, image, children }) {
   return (
@@ -52,9 +52,9 @@ function Section({ title, image, children }) {
   )
 }
 
-function Discover({data}) {
+function Discover({ data }) {
   return (
-    <Section title={data.title} image={data.imageUrl}>
+    <Section title={data.title} image={urlFor(data?.image).url()}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>{data.DescOne}</p>
         <p>{data.DescTwo}</p>
@@ -74,9 +74,9 @@ function Discover({data}) {
   )
 }
 
-function Build({data}) {
+function Build({ data }) {
   return (
-    <Section title={data.title} image={data.imageUrl}>
+    <Section title={data.title} image={urlFor(data?.image).url()}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>{data.DescOne}</p>
         <p>{data.DescTwo}</p>
@@ -93,9 +93,9 @@ function Build({data}) {
   )
 }
 
-function Deliver({data}) {
+function Deliver({ data }) {
   return (
-    <Section title={data.title} image={data.imageUrl}>
+    <Section title={data.title} image={urlFor(data?.image).url()}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>{data.DescOne}</p>
         <p>{data.DescTwo}</p>
@@ -117,7 +117,7 @@ function Deliver({data}) {
   )
 }
 
-function Values({data}) {
+function Values({ data }) {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
       {/* Assuming you have a GridPattern component */}
@@ -155,16 +155,19 @@ export const metadata = {
 
 export default async function Process() {
   const clientData = await getSanityData()
-  console.log(clientData[0],"process data")
+  // console.log(clientData[0],"process data")
   return (
     <>
-      <PageIntro eyebrow={clientData[0].heroDataComponent.eyebrow} title={clientData[0].heroDataComponent.title}>
+      <PageIntro
+        eyebrow={clientData[0].heroDataComponent.eyebrow}
+        title={clientData[0].heroDataComponent.title}
+      >
         <p>{clientData[0].heroDataComponent.subHeading}</p>
       </PageIntro>
 
       <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
         <Discover data={clientData[0].discoverDataComponent} />
-        <Build data={clientData[0].buildDataComponent}/>
+        <Build data={clientData[0].buildDataComponent} />
         <Deliver data={clientData[0].deliverDataComponent} />
       </div>
 
@@ -174,7 +177,6 @@ export default async function Process() {
     </>
   )
 }
-
 
 async function getSanityData() {
   const clientData = getPosts('process')

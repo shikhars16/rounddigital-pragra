@@ -16,6 +16,13 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   images: {
     domains: ["res.cloudinary.com"],
+    remotePatterns:[
+      {
+        protocol:'https',
+        hostname:'cdn.sanity.io',
+        port:''
+      }
+    ]
   },
 }
 
