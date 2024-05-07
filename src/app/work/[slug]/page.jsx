@@ -63,9 +63,10 @@ async function SeperateWork({ params }) {
               <Image
                 className="pointer-events-none  w-full  transition duration-300 group-hover:opacity-100"
                 aria-hidden="true"
-                src={urlFor(caseStudy?.image).url()}
+                src={urlFor(caseStudy?.image).quality(100).url()}
                 width={100}
                 height={100}
+                quality={100}
               />
             </div>
           </div>
@@ -123,13 +124,6 @@ async function getSanityData(slug) {
   return data
 }
 
-// async function getSanityData() {
-//   const clientData = getPosts('work')
-
-//   const data = await clientData
-//    console.log(data,2)
-//   return data
-// }
 
 const renderRichText = (richTextContent) => {
   return richTextContent.map((block) => {
@@ -142,7 +136,7 @@ const renderRichText = (richTextContent) => {
               const marks = span.marks.join(' ')
 
               return (
-                <span key={span._key} className={marks}>
+                <span key={span._key} className={`${block.style == 'h2'? 'text-bold text-2xl' : block.style == 'h2'? 'text-bold text-2xl' : 'text-normal'}`}>
                   {span.text}
                 </span>
               )
