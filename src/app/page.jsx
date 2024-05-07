@@ -13,7 +13,7 @@ import logoPhobiaDark from '@/images/clients/phobia/logo-dark.svg'
 
 import imageLaptop from '@/images/laptop.jpg'
 import { loadCaseStudies } from '@/lib/mdx'
-import { client, getPosts } from '@/utils/sanity'
+import { client, getPosts, urlFor } from '@/utils/sanity'
 // import { useEffect } from 'react'
 
 
@@ -35,7 +35,7 @@ function Clients({clients}) {
             {clients?.clientsArray && clients.clientsArray.map((item) => (
               <li key={item.key}>
                 <FadeIn>
-                  <Image src={item.imageUrl} alt={item.name} unoptimized width={200} height={100}/>
+                  <Image src={urlFor(item?.image).url()} alt={item.name} unoptimized width={200} height={100}/>
                 </FadeIn>
               </li>
             ))}
