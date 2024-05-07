@@ -148,7 +148,7 @@ export default async function Home({props}) {
 
 
   const clientData =await getSanityData()
-  // console.log(clientData, 'client data from sanity')
+  console.log(clientData[0].clients, 'client data from sanity')
 
 
   return (

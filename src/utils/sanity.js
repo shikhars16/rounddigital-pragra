@@ -5,8 +5,8 @@ import ImageUrlBuilder from '@sanity/image-url';
 export const client = createClient({
     projectId: '33cjhm4h',
     dataset: 'production',
-    useCdn: true, // set to `false` to bypass the edge cache
-    apiVersion: '2024-05-02', // use current date (YYYY-MM-DD) to target the latest API version
+    useCdn: false, // set to `false` to bypass the edge cache
+    apiVersion: '2024-05-06', // use current date (YYYY-MM-DD) to target the latest API version
     // token: process.env.SANITY_SECRET_TOKEN // Only if you want to update content with the client
   })
 
@@ -38,4 +38,23 @@ export async function getPosts(type) {
 
   export function urlFor(source){
     return builder.image(source)
+  }
+
+
+  export async function getSanityContent({ query, variables = {} }) {
+    const { data } = await fetch(
+      'https://33cjhm4h.api.sanity.io/v1/graphql/production/default',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+      },
+    ).then((response) => response.json());
+  
+    return data;
   }
