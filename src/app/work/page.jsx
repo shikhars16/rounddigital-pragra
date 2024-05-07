@@ -20,9 +20,10 @@ import logoUnseal from '@/images/clients/unseal/logo-dark.svg'
 import { formatDate } from '@/lib/formatDate'
 import { loadCaseStudies } from '@/lib/mdx'
 import { contactData } from '@/data/homepage'
-import { getPosts } from '@/utils/sanity'
+import { getPosts, getSanityContent, urlFor } from '@/utils/sanity'
 
 function CaseStudies({ caseStudies }) {
+  console.log(caseStudies,112233)
   return (
     <Container className="mt-40">
       <FadeIn>
@@ -31,8 +32,8 @@ function CaseStudies({ caseStudies }) {
         </h2>
       </FadeIn>
       <div className="mt-10 space-y-20 sm:space-y-24 lg:space-y-32">
-        {caseStudies.map((caseStudy) => (
-          <FadeIn key={caseStudy.client}>
+          {caseStudies.map((caseStudy) => (
+          <FadeIn key={caseStudy._key}>
             <article>
               <Border className="grid grid-cols-3 gap-x-8 gap-y-8 pt-16">
                 <div className="col-span-full sm:flex sm:items-center sm:justify-between sm:gap-x-8 lg:col-span-1 lg:block">
@@ -42,9 +43,11 @@ function CaseStudies({ caseStudies }) {
                       alt=""
                       className="h-16 w-16 flex-none"
                       unoptimized
+                      width={100}
+                      height={100}
                     />
                     <h3 className="mt-6 text-sm font-semibold text-[#e14242] sm:mt-0 lg:mt-8">
-                      {caseStudy.client}
+                      {caseStudy.heading}
                     </h3>
                   </div>
                   <div className="mt-1 flex gap-x-4 sm:mt-0 lg:block">
@@ -52,24 +55,24 @@ function CaseStudies({ caseStudies }) {
                       {caseStudy.service}
                     </p>
                     <p className="text-sm text-[#e14242] lg:mt-2">
-                      <time dateTime={caseStudy.date}>
+                      {/* <time dateTime={caseStudy.date}>
                         {formatDate(caseStudy.date)}
-                      </time>
+                      </time> */}
                     </p>
                   </div>
                 </div>
                 <div className="col-span-full lg:col-span-2 lg:max-w-2xl">
                   <p className="font-display text-4xl font-medium text-[#e14242]">
-                    <Link href={caseStudy.href}>{caseStudy.title}</Link>
+                    {/* <Link href={caseStudy.href}>{caseStudy.title}</Link> */}
                   </p>
                   <div className="mt-6 space-y-6 text-base text-neutral-600">
-                    {caseStudy.summary.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
+                    {/* // {caseStudy.summary.map((paragraph) => ( */}
+                      <p key={caseStudy.summary}>{caseStudy.summary}</p>
+                    {/* // ))} */}
                   </div>
                   <div className="mt-8 flex">
                     <Button
-                      href={caseStudy.href}
+                      href={`/work/${caseStudy.slug.current}`}
                       aria-label={`Read case study: ${caseStudy.client}`}
                     >
                       Read case study
@@ -87,7 +90,7 @@ function CaseStudies({ caseStudies }) {
               </Border>
             </article>
           </FadeIn>
-        ))}
+        ))}  
       </div>
     </Container>
   )
@@ -140,9 +143,10 @@ export const metadata = {
 }
 
 export default async function Work() {
-  let caseStudies = await loadCaseStudies()
+  // let caseStudies = await loadCaseStudies()
   const clientData = await getSanityData()
   
+  // console.log(clientData[0], 'here is all work client id linst')
 
   return (
     <>
@@ -150,7 +154,7 @@ export default async function Work() {
         <p>{clientData[0]?.heroDataComponent.Desc}</p>
       </PageIntro>
 
-      <CaseStudies caseStudies={caseStudies} />
+      <CaseStudies caseStudies={clientData[0].workArray} />
 
       <Testimonial
         className="mt-24 sm:mt-32 lg:mt-40"
@@ -170,6 +174,38 @@ async function getSanityData() {
   const clientData = getPosts('work')
 
   const data = await clientData
-  //  console.log(data)
+   console.log(data)
   return data
 }
+
+
+// async function graphqlQuery() {
+//   const data = await getSanityContent({
+//     query: `
+//     query AllWorkData {
+//       allWork {
+//         _id
+//         title
+//         content {
+//           ... on RichText {
+//             _type
+//             children {
+//               ... on Span {
+//                 text
+//                 marks
+//               }
+//             }
+//           }
+//           ... on Image {
+//             asset {
+//               url
+//             }
+//           }
+//         }
+//       }
+//     }
+//     `,
+
+//   });
+//   return data;
+// }
