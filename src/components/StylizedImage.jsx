@@ -20,7 +20,7 @@ const shapes = [
   },
 ]
 
-export function StylizedImage({ shape = 0, className, ...props }) {
+export function StylizedImage({ shape = 0, className, image, ...props }) {
   let id = useId()
   let { width, height, path } = shapes[shape]
 
@@ -39,7 +39,8 @@ export function StylizedImage({ shape = 0, className, ...props }) {
                 alt=""
                 className="w-full bg-neutral-100 object-cover"
                 style={{ aspectRatio: `${width} / ${height}` }}
-                {...props}
+                src={image}
+                width={width} height={height}
               />
             </foreignObject>
           </g>

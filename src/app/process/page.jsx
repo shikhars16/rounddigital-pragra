@@ -9,9 +9,18 @@ import { PageIntro } from '@/components/PageIntro'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { TagList, TagListItem } from '@/components/TagList'
+import { contactData } from '@/data/homepage'
+import {
+  heroData,
+  discoverData,
+  buildData,
+  deliverData,
+  valuesData,
+} from '@/data/processpage'
 import imageLaptop from '@/images/laptop.jpg'
 import imageMeeting from '@/images/meeting.jpg'
 import imageWhiteboard from '@/images/whiteboard.jpg'
+import { getPosts, urlFor } from '@/utils/sanity'
 
 function Section({ title, image, children }) {
   return (
@@ -20,7 +29,7 @@ function Section({ title, image, children }) {
         <div className="flex justify-center">
           <FadeIn className="w-[33.75rem] flex-none lg:w-[45rem]">
             <StylizedImage
-              {...image}
+              image={image}
               sizes="(min-width: 1024px) 41rem, 31rem"
               className="justify-center lg:justify-end lg:group-even/section:justify-start"
             />
@@ -43,182 +52,95 @@ function Section({ title, image, children }) {
   )
 }
 
-function Discover() {
+function Discover({ data }) {
   return (
-    <Section title="Discover" image={{ src: imageWhiteboard }}>
+    <Section title={data.title} image={urlFor(data?.image).url()}>
       <div className="space-y-6 text-base text-neutral-600">
-        <p>
-          We work closely with our clients to understand their{' '}
-          <strong className="font-semibold text-[#e14242]">needs</strong> and
-          goals, embedding ourselves in their every day operations to understand
-          what makes their business tick.
-        </p>
-        <p>
-          Our team of private investigators shadow the company director’s for
-          several weeks while our account managers focus on going through their
-          trash. Our senior security experts then perform social engineering
-          hacks to gain access to their{' '}
-          <strong className="font-semibold text-[#e14242]">business</strong>{' '}
-          accounts — handing that information over to our forensic accounting
-          team.
-        </p>
-        <p>
-          Once the full audit is complete, we report back with a comprehensive{' '}
-          <strong className="font-semibold text-[#e14242]">plan</strong> and,
-          more importantly, a budget.
-        </p>
+        <p>{data.DescOne}</p>
+        <p>{data.DescTwo}</p>
+        <p>{data.DescThree}</p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-[#e14242]">
-        Included in this phase
+        {data.phase.heading}
       </h3>
       <TagList className="mt-4">
-        <TagListItem>In-depth questionnaires</TagListItem>
-        <TagListItem>Feasibility studies</TagListItem>
-        <TagListItem>Blood samples</TagListItem>
-        <TagListItem>Employee surveys</TagListItem>
-        <TagListItem>Proofs-of-concept</TagListItem>
-        <TagListItem>Forensic audit</TagListItem>
+        {data?.phase?.tag &&
+          data?.phase?.tag.map((item) => (
+            <TagListItem key={item.id}>{item.point}</TagListItem>
+          ))}
       </TagList>
     </Section>
   )
 }
 
-function Build() {
+function Build({ data }) {
   return (
-    <Section title="Build" image={{ src: imageLaptop, shape: 1 }}>
+    <Section title={data.title} image={urlFor(data?.image).url()}>
       <div className="space-y-6 text-base text-neutral-600">
-        <p>
-          Based off of the discovery phase, we develop a comprehensive roadmap
-          for each product and start working towards delivery. The roadmap is an
-          intricately tangled mess of technical nonsense designed to drag the
-          project out as long as possible.
-        </p>
-        <p>
-          Each client is assigned a key account manager to keep lines of
-          communication open and obscure the actual progress of the project.
-          They act as a buffer between the client’s incessant nagging and the
-          development team who are hard at work scouring open source projects
-          for code to re-purpose.
-        </p>
-        <p>
-          Our account managers are trained to only reply to client emails after
-          9pm, several days after the initial email. This reinforces the general
-          aura that we are very busy and dissuades clients from asking for
-          changes.
-        </p>
+        <p>{data.DescOne}</p>
+        <p>{data.DescTwo}</p>
+        <p>{data.DescThree}</p>
       </div>
 
       <Blockquote
-        author={{ name: 'Debra Fiscal', role: 'CEO of Unseal' }}
+        author={{ name: data.author.name, role: data.author.role }}
         className="mt-12"
       >
-        Studio were so regular with their progress updates we almost began to
-        think they were automated!
+        {data.author.desc}
       </Blockquote>
     </Section>
   )
 }
 
-function Deliver() {
+function Deliver({ data }) {
   return (
-    <Section title="Deliver" image={{ src: imageMeeting, shape: 2 }}>
+    <Section title={data.title} image={urlFor(data?.image).url()}>
       <div className="space-y-6 text-base text-neutral-600">
-        <p>
-          About halfway through the Build phase, we push each project out by 6
-          weeks due to a change in{' '}
-          <strong className="font-semibold text-[#e14242]">requirements</strong>
-          . This allows us to increase the budget a final time before launch.
-        </p>
-        <p>
-          Despite largely using pre-built components, most of the{' '}
-          <strong className="font-semibold text-[#e14242]">progress</strong> on
-          each project takes place in the final 24 hours. The development time
-          allocated to each client is actually spent making augmented reality
-          demos that go viral on social media.
-        </p>
-        <p>
-          We ensure that the main pages of the site are{' '}
-          <strong className="font-semibold text-[#e14242]">
-            fully functional
-          </strong>{' '}
-          at launch — the auxiliary pages will, of course, be lorem ipusm shells
-          which get updated as part of our exorbitant{' '}
-          <strong className="font-semibold text-[#e14242]">maintenance</strong>{' '}
-          retainer.
-        </p>
+        <p>{data.DescOne}</p>
+        <p>{data.DescTwo}</p>
+        <p>{data.DescThree}</p>
       </div>
 
       <h3 className="mt-12 font-display text-base font-semibold text-[#e14242]">
-        Included in this phase
+        {data.phase.heading}
       </h3>
       <List className="mt-8">
-        <ListItem title="Testing">
-          Our projects always have 100% test coverage, which would be impressive
-          if our tests weren’t as porous as a sieve.
-        </ListItem>
-        <ListItem title="Infrastructure">
-          To ensure reliability we only use the best Digital Ocean droplets that
-          $4 a month can buy.
-        </ListItem>
-        <ListItem title="Support">
-          Because we hold the API keys for every critical service your business
-          uses, you can expect a lifetime of support, and invoices, from us.
-        </ListItem>
+        {data?.phase?.tag &&
+          data?.phase?.tag.map((item) => (
+            <ListItem key={item.id} title={item.title}>
+              {item.point}
+            </ListItem>
+          ))}
       </List>
     </Section>
   )
 }
 
-function Values() {
+function Values({ data }) {
   return (
     <div className="relative mt-24 pt-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40">
+      {/* Assuming you have a GridPattern component */}
       <div className="absolute inset-x-0 top-0 -z-10 h-[884px] overflow-hidden rounded-t-4xl bg-gradient-to-b from-neutral-50">
+        {/* Assuming you have a GridPattern component */}
         <GridPattern
           className="absolute inset-0 h-full w-full fill-neutral-100 stroke-[#e14242]/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
           yOffset={-270}
         />
       </div>
 
-      <SectionIntro
-        eyebrow="Our values"
-        title="Balancing reliability and innovation"
-      >
-        <p>
-          We strive to stay at the forefront of emerging trends and
-          technologies, while completely ignoring them and forking that old
-          Rails project we feel comfortable using. We stand by our core values
-          to justify that decision.
-        </p>
+      <SectionIntro eyebrow={data.eyebrow} title={data.title}>
+        <p>{data.DescOne}</p>
       </SectionIntro>
 
+      {/* Assuming you have a Container component */}
       <Container className="mt-24">
         <GridList>
-          <GridListItem title="Meticulous">
-            The first part of any partnership is getting our designer to put
-            your logo in our template. The second step is getting them to do the
-            colors.
-          </GridListItem>
-          <GridListItem title="Efficient">
-            We pride ourselves on never missing a deadline which is easy because
-            most of the work was done years ago.
-          </GridListItem>
-          <GridListItem title="Adaptable">
-            Every business has unique needs and our greatest challenge is
-            shoe-horning those needs into something we already built.
-          </GridListItem>
-          <GridListItem title="Honest">
-            We are transparent about all of our processes, banking on the simple
-            fact our clients never actually read anything.
-          </GridListItem>
-          <GridListItem title="Loyal">
-            We foster long-term relationships with our clients that go beyond
-            just delivering a product, allowing us to invoice them for decades.
-          </GridListItem>
-          <GridListItem title="Innovative">
-            The technological landscape is always evolving and so are we. We are
-            constantly on the lookout for new open source projects to clone.
-          </GridListItem>
+          {data.phase.tag.map((item) => (
+            <GridListItem key={item.id} title={item.title}>
+              {item.point}
+            </GridListItem>
+          ))}
         </GridList>
       </Container>
     </div>
@@ -231,26 +153,35 @@ export const metadata = {
     'We believe in efficiency and maximizing our resources to provide the best value to our clients.',
 }
 
-export default function Process() {
+export default async function Process() {
+  const clientData = await getSanityData()
+  // console.log(clientData[0],"process data")
   return (
     <>
-      <PageIntro eyebrow="Our process" title="How we work">
-        <p>
-          We believe in efficiency and maximizing our resources to provide the
-          best value to our clients. The primary way we do that is by re-using
-          the same five projects we’ve been developing for the past decade.
-        </p>
+      <PageIntro
+        eyebrow={clientData[0].heroDataComponent.eyebrow}
+        title={clientData[0].heroDataComponent.title}
+      >
+        <p>{clientData[0].heroDataComponent.subHeading}</p>
       </PageIntro>
 
       <div className="mt-24 space-y-24 [counter-reset:section] sm:mt-32 sm:space-y-32 lg:mt-40 lg:space-y-40">
-        <Discover />
-        <Build />
-        <Deliver />
+        <Discover data={clientData[0].discoverDataComponent} />
+        <Build data={clientData[0].buildDataComponent} />
+        <Deliver data={clientData[0].deliverDataComponent} />
       </div>
 
-      <Values />
+      <Values data={clientData[0].valuesDataComponent} />
 
-      <ContactSection />
+      <ContactSection contactData={contactData} />
     </>
   )
+}
+
+async function getSanityData() {
+  const clientData = getPosts('process')
+
+  const data = await clientData
+  //  console.log(data)
+  return data
 }

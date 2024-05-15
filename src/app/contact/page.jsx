@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import Link from 'next/link'
-
+import { heroData,contactData } from '@/data/contactpage'
 import { Border } from '@/components/Border'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
@@ -90,24 +90,20 @@ function ContactDetails() {
   return (
     <FadeIn>
       <h2 className="font-display text-base font-semibold text-[#e14242]">
-        Our offices
+        {contactData.title}
       </h2>
       <p className="mt-6 text-base text-neutral-600">
-        Prefer doing things in person? We don’t but we have to list our
-        addresses here for legal reasons.
+        {contactData.description}
       </p>
 
       <Offices className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2" />
 
       <Border className="mt-16 pt-16">
         <h2 className="font-display text-base font-semibold text-[#e14242]">
-          Email us
+          {contactData.emailSection.title}
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
-          {[
-            ['Careers', 'careers@studioagency.com'],
-            ['Press', 'press@studioagency.com'],
-          ].map(([label, email]) => (
+        {contactData.emailSection.contacts.map(({ label, email }) => (
             <div key={email}>
               <dt className="font-semibold text-[#e14242]">{label}</dt>
               <dd>
@@ -125,7 +121,7 @@ function ContactDetails() {
 
       <Border className="mt-16 pt-16">
         <h2 className="font-display text-base font-semibold text-[#e14242]">
-          Follow us
+        {contactData.followUsSection.title}
         </h2>
         <SocialMedia className="mt-6" />
       </Border>
@@ -141,8 +137,8 @@ export const metadata = {
 export default function Contact() {
   return (
     <>
-      <PageIntro eyebrow="Contact us" title="Let’s work together">
-        <p>We can’t wait to hear from you.</p>
+      <PageIntro eyebrow={heroData.eyebrow} title={heroData.title}>
+        <p>{heroData.desc}</p>
       </PageIntro>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">

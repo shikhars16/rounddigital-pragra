@@ -5,10 +5,11 @@ import { GrayscaleTransitionImage } from '@/components/GrayscaleTransitionImage'
 import { MDXComponents } from '@/components/MDXComponents'
 import { PageIntro } from '@/components/PageIntro'
 import { PageLinks } from '@/components/PageLinks'
+import { contactData } from '@/data/homepage'
 import { loadCaseStudies } from '@/lib/mdx'
 
 export default async function CaseStudyLayout({ caseStudy, children }) {
-  let allCaseStudies = await loadCaseStudies()
+  // let allCaseStudies = await loadCaseStudies()
   let moreCaseStudies = allCaseStudies
     .filter(({ metadata }) => metadata !== caseStudy)
     .slice(0, 2)
@@ -76,7 +77,7 @@ export default async function CaseStudyLayout({ caseStudy, children }) {
         />
       )}
 
-      <ContactSection />
+      <ContactSection contactData={contactData}/>
     </>
   )
 }
