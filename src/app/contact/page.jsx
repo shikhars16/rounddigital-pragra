@@ -1,4 +1,5 @@
-import { useId } from 'react'
+"use client"
+import React, { useId } from 'react'
 import Link from 'next/link'
 import { heroData,contactData } from '@/data/contactpage'
 import { Border } from '@/components/Border'
@@ -8,6 +9,7 @@ import { FadeIn } from '@/components/FadeIn'
 import { Offices } from '@/components/Offices'
 import { PageIntro } from '@/components/PageIntro'
 import { SocialMedia } from '@/components/SocialMedia'
+import { sendContactForm } from '@/lib/api'
 
 function TextInput({ label, ...props }) {
   let id = useId()
@@ -45,35 +47,51 @@ function RadioInput({ label, ...props }) {
 }
 
 function ContactForm() {
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    message: '',
+    budget: '',
+  });
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    sendContactForm(formData)
+    // Add further actions here, like submitting the form data to a server
+  };
+
   return (
     <FadeIn className="lg:order-last">
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2 className="font-display text-base font-semibold text-[#e14242]">
           Work inquiries
         </h2>
         <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
-          <TextInput label="Name" name="name" autoComplete="name" />
-          <TextInput
-            label="Email"
-            type="email"
-            name="email"
-            autoComplete="email"
-          />
-          <TextInput
-            label="Company"
-            name="company"
-            autoComplete="organization"
-          />
-          <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
-          <TextInput label="Message" name="message" />
+          <TextInput label="Name" name="name" value={formData.name} onChange={handleChange} autoComplete="name" />
+          <TextInput label="Email" type="email" name="email" value={formData.email} onChange={handleChange} autoComplete="email" />
+          <TextInput label="Company" name="company" value={formData.company} onChange={handleChange} autoComplete="organization" />
+          <TextInput label="Phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} autoComplete="tel" />
+          <TextInput label="Message" name="message" value={formData.message} onChange={handleChange} />
           <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
             <fieldset>
               <legend className="text-base/6 text-neutral-500">Budget</legend>
               <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <RadioInput label="$25K – $50K" name="budget" value="25" />
-                <RadioInput label="$50K – $100K" name="budget" value="50" />
-                <RadioInput label="$100K – $150K" name="budget" value="100" />
-                <RadioInput label="More than $150K" name="budget" value="150" />
+                <RadioInput label="$25K – $50K" name="budget" value="25" onChange={handleChange} checked={formData.budget === '25'} />
+                <RadioInput label="$50K – $100K" name="budget" value="50" onChange={handleChange} checked={formData.budget === '50'} />
+                <RadioInput label="$100K – $150K" name="budget" value="100" onChange={handleChange} checked={formData.budget === '100'} />
+                <RadioInput label="More than $150K" name="budget" value="150" onChange={handleChange} checked={formData.budget === '150'} />
               </div>
             </fieldset>
           </div>
@@ -83,8 +101,9 @@ function ContactForm() {
         </Button>
       </form>
     </FadeIn>
-  )
+  );
 }
+
 
 function ContactDetails() {
   return (
@@ -129,7 +148,7 @@ function ContactDetails() {
   )
 }
 
-export const metadata = {
+const metadata = {
   title: 'Contact Us',
   description: 'Let’s work together. We can’t wait to hear from you.',
 }
