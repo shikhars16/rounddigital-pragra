@@ -15,7 +15,7 @@ import { getPosts, urlFor } from '@/utils/sanity'
 
 function Culture({data}) {
   return (
-    <div className="mt-24 rounded-4xl bg-[#e14242] py-24 sm:mt-32 lg:mt-40 lg:py-32">
+    <div className="mt-24 bg-[#e14242] py-24 sm:mt-32 lg:mt-40 lg:py-32">
       <SectionIntro
         eyebrow={data.title}
         title={data.heading}
@@ -127,7 +127,6 @@ export default async function About() {
         intro="Our team of experienced designers and developers has just one thing on their mind; working on your ideas to draw a smile on the face of your users worldwide. From conducting Brand Sprints to UX Design."
         pages={blogArticles}
       />
-
       <ContactSection contactData={contactData} />
     </>
   )

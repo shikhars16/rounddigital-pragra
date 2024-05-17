@@ -25,7 +25,7 @@ import { client, getPosts, urlFor } from '@/utils/sanity'
 
 function Clients({ clients }) {
   return (
-    <div className="mt-24 rounded-4xl bg-[#e14242] py-20 sm:mt-32 sm:py-32 lg:mt-56">
+    <div className="mt-24 bg-[#e14242] py-20 sm:mt-32 sm:py-32 lg:mt-56">
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           {clients?.heading && (
