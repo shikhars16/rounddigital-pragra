@@ -127,7 +127,6 @@ export default async function About() {
         intro="Our team of experienced designers and developers has just one thing on their mind; working on your ideas to draw a smile on the face of your users worldwide. From conducting Brand Sprints to UX Design."
         pages={blogArticles}
       />
-
       <ContactSection contactData={contactData} />
     </>
   )
