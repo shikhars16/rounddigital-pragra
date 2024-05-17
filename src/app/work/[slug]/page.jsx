@@ -1,4 +1,4 @@
-// "use client"
+ "use client"
 import { Blockquote } from '@/components/Blockquote'
 import { ContactSection } from '@/components/ContactSection'
 import { Container } from '@/components/Container'
@@ -14,8 +14,8 @@ import Image from 'next/image'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 // import React, { useEffect, useState } from 'react'
 
-async function SeperateWork({ params }) {
-  const caseStudy = await getSanityData(params.slug)
+function SeperateWork({ params }) {
+  const caseStudy =  getSanityData(params.slug)
   // console.log(caseStudy,666)
 
   return (
@@ -80,7 +80,7 @@ async function SeperateWork({ params }) {
         <div>
           <TagList className={clsx('my-6', '')}>
             {caseStudy?.tags &&
-              caseStudy.tags.map((tag) => <TagListItem>{tag}</TagListItem>)}
+              caseStudy.tags.map((tag) => <TagListItem key={tag}>{tag}</TagListItem>)}
           </TagList>
         </div>
         <div>
