@@ -18,7 +18,6 @@ import logoNorthAdventures from '@/images/clients/north-adventures/logo-dark.svg
 import logoPhobia from '@/images/clients/phobia/logo-dark.svg'
 import logoUnseal from '@/images/clients/unseal/logo-dark.svg'
 import { formatDate } from '@/lib/formatDate'
-import { loadCaseStudies } from '@/lib/mdx'
 import { contactData } from '@/data/homepage'
 import { getPosts, getSanityContent, urlFor } from '@/utils/sanity'
 
