@@ -1,0 +1,23 @@
+.form-container {
+    
+    margin: 0 auto;
+  }
+  
+  .form-label {
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .form-input {
+    margin-left: 10px;
+  }
+  
+  .form-submit {
+    background-color: #e14242;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

@@ -1,6 +1,8 @@
 "use client"
-// src/components/form.jsx
+// src/components/LoginForm.jsx
 import React, { useRef } from 'react';
+import '@/styles/forms.css'
+
 
 export function Form() {
   const usernameRef = useRef(null);
@@ -16,18 +18,18 @@ export function Form() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" name="Username" ref={usernameRef} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="text" name="password" ref={passwordRef} />
-      </label>
-      <br /><br />
-      <input type="submit" value="Submit" />
-    </form>
+    <form onSubmit={handleSubmit} className="form-container">
+    <label className="form-label">
+      Username:
+      <input type="text" name="Username" ref={usernameRef} className="form-input" />
+    </label>
+    <br />
+    <label className="form-label">
+      Password:
+      <input type="password" name="password" ref={passwordRef} className="form-input" />
+    </label>
+    <br /><br />
+    <button type="submit" className="form-submit">Sign In</button>
+  </form>
   );
 }
