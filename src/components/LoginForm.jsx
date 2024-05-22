@@ -1,35 +1,57 @@
 "use client"
-// src/components/LoginForm.jsx
 import React, { useRef } from 'react';
-import '@/styles/forms.css'
-
+import '@/styles/forms.css';
 
 export function Form() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
-      Username: usernameRef.current.value,
+      username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
-    console.log('Form submitted:', formData);
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
+
+      // Assuming the server returns a JSON object with a token
+      const data = await response.json();
+      console.log('Token:', data.token);
+
+      // Reset input fields to null
+      usernameRef.current.value = '';
+      passwordRef.current.value = '';
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
-    <label className="form-label">
-      Username:
-      <input type="text" name="Username" ref={usernameRef} className="form-input" />
-    </label>
-    <br />
-    <label className="form-label">
-      Password:
-      <input type="password" name="password" ref={passwordRef} className="form-input" />
-    </label>
-    <br /><br />
-    <button type="submit" className="form-submit">Sign In</button>
-  </form>
+      <label className="form-label">
+        Username:
+        <input type="text" name="username" ref={usernameRef} className="form-input" />
+      </label>
+      <br />
+      <label className="form-label">
+        Password:
+        <input type="password" name="password" ref={passwordRef} className="form-input" />
+      </label>
+      <br /><br />
+      <button type="submit" className="form-submit">Sign In</button>
+    </form>
   );
 }
