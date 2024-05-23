@@ -228,7 +228,6 @@ function RootLayoutInner({ children }) {
                     />
                   </div>
                   <div className="sm:border-l sm:border-transparent sm:pl-16">
-                   
                   </div>
                 </div>
               </Container>

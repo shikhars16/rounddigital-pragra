@@ -1,20 +1,22 @@
 "use client"
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import '@/styles/forms.css';
 
 export function Form() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
+  const [isRegisterMode, setIsRegisterMode] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [showUserNotFound, setShowUserNotFound] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const formData = {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
 
     try {
-      const response = await fetch('/login', {
+      const response = await fetch(isRegisterMode ? 'http://localhost:3001/register' : 'http://localhost:3001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,34 +26,85 @@ export function Form() {
 
       if (!response.ok) {
         const errorMessage = await response.text();
+        if (isRegisterMode && errorMessage.includes('User not found')) {
+          // Display "User not found. Please register" message
+          setShowUserNotFound(true);
+        }
         throw new Error(errorMessage);
       }
 
-      // Assuming the server returns a JSON object with a token
       const data = await response.json();
-      console.log('Token:', data.token);
+      console.log('Response:', data);
 
-      // Reset input fields to null
+      // Reset input fields
       usernameRef.current.value = '';
       passwordRef.current.value = '';
+
+      // Hide "User not found" message if it was displayed previously
+      setShowUserNotFound(false);
     } catch (error) {
       console.error('Error:', error.message);
     }
   };
 
+  const handleRegisterClick = () => {
+    setIsRegisterMode(true);
+  };
+
+  const handleAddData = async () => {
+    // Send form data to MongoDB
+    await handleSubmit();
+  
+    // Reset form mode and input fields
+    setIsRegisterMode(false);
+    usernameRef.current.value = '';
+    passwordRef.current.value = '';
+  };
+
+  const handleCancel = () => {
+    // Reset form mode and input fields
+    setIsRegisterMode(false);
+    usernameRef.current.value = '';
+    passwordRef.current.value = '';
+  };
+
+  const handleInputChange = () => {
+    // Check if both username and password fields have input
+    const usernameValue = usernameRef.current.value.trim();
+    const passwordValue = passwordRef.current.value.trim();
+    setIsFormValid(usernameValue !== '' && passwordValue !== '');
+  };
+
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <label className="form-label">
-        Username:
-        <input type="text" name="username" ref={usernameRef} className="form-input" />
+        {isRegisterMode ? 'New Username:' : 'Username:'}
+        <input type="text" name="username" ref={usernameRef} className="form-input" onChange={handleInputChange} />
       </label>
       <br />
       <label className="form-label">
-        Password:
-        <input type="password" name="password" ref={passwordRef} className="form-input" />
+        {isRegisterMode ? 'New Password:' : 'Password:'}
+        <input type="password" name="password" ref={passwordRef} className="form-input" onChange={handleInputChange} />
       </label>
-      <br /><br />
-      <button type="submit" className="form-submit">Sign In</button>
+      <br />
+      {showUserNotFound && (
+        <p style={{ color: 'red' }}>User not found. Please register.</p>
+      )}
+      <br />
+      {isRegisterMode ? (
+        <>
+          <button type="button" className="form-submit" onClick={handleAddData} disabled={!isFormValid}>
+            Register
+          </button>
+          <button type="button" className="form-submit" onClick={handleCancel}>
+            Cancel
+          </button>
+        </>
+      ) : (
+        <button type="button" className="form-submit" onClick={handleRegisterClick}>
+          Sign in
+        </button>
+      )}
     </form>
   );
 }
