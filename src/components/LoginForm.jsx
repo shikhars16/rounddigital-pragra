@@ -9,14 +9,15 @@ export function Form() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showUserNotFound, setShowUserNotFound] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission
     const formData = {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
 
     try {
-      const response = await fetch(isRegisterMode ? 'http://localhost:3001/register' : 'http://localhost:3001/login', {
+      const response = await fetch(isRegisterMode ? 'http://localhost:3000/register' : 'http://localhost:3000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,8 +27,7 @@ export function Form() {
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        if (isRegisterMode && errorMessage.includes('User not found')) {
-          // Display "User not found. Please register" message
+        if (!isRegisterMode && errorMessage.includes('User not found')) {
           setShowUserNotFound(true);
         }
         throw new Error(errorMessage);
@@ -51,25 +51,20 @@ export function Form() {
     setIsRegisterMode(true);
   };
 
-  const handleAddData = async () => {
-    // Send form data to MongoDB
-    await handleSubmit();
-  
-    // Reset form mode and input fields
+  const handleAddData = async (event) => {
+    await handleSubmit(event);
     setIsRegisterMode(false);
     usernameRef.current.value = '';
     passwordRef.current.value = '';
   };
 
   const handleCancel = () => {
-    // Reset form mode and input fields
     setIsRegisterMode(false);
     usernameRef.current.value = '';
     passwordRef.current.value = '';
   };
 
   const handleInputChange = () => {
-    // Check if both username and password fields have input
     const usernameValue = usernameRef.current.value.trim();
     const passwordValue = passwordRef.current.value.trim();
     setIsFormValid(usernameValue !== '' && passwordValue !== '');
@@ -101,7 +96,7 @@ export function Form() {
           </button>
         </>
       ) : (
-        <button type="button" className="form-submit" onClick={handleRegisterClick}>
+        <button type="submit" className="form-submit">
           Sign in
         </button>
       )}
