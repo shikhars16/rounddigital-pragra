@@ -15,13 +15,16 @@ import { List, ListItem } from '@/components/List'
 import { SectionIntro } from '@/components/SectionIntro'
 import { StylizedImage } from '@/components/StylizedImage'
 import { Testimonial } from '@/components/Testimonial'
-
+import HeroSection from '@/components/HeroSection'
 import logoPhobiaDark from '@/images/clients/phobia/logo-dark.svg'
-
+import NewService from '@/components/newServices'
 import imageLaptop from '@/images/laptop.jpg'
 import { loadCaseStudies } from '@/lib/mdx'
 import { client, getPosts, urlFor } from '@/utils/sanity'
+import Company from '@/components/Companies'
 // import { useEffect } from 'react'
+
+
 
 function Clients({ clients }) {
   return (
@@ -169,7 +172,8 @@ export default async function Home({ props }) {
 
   return (
     <>
-      <Container className="mt-24 sm:mt-32 md:mt-56">
+    <HeroSection/>
+      <Container className="pb-20 mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           {clientData[0].heroComponent?.heading && (
             <h1 className="font-display text-5xl font-medium tracking-tight text-[#e14242] [text-wrap:balance] sm:text-7xl">
@@ -184,7 +188,8 @@ export default async function Home({ props }) {
         </FadeIn>
       </Container>
 
-      <Clients clients={clientData[0].clients} />
+      <Company/>
+      
 
       <CaseStudies caseStudies={caseStudies} />
 
@@ -198,7 +203,7 @@ export default async function Home({ props }) {
         {clientData[0]?.testimonialData?.quote}
       </Testimonial>
 
-      <Services data={clientData[0].service} />
+      <NewService/>
 
       <ContactSection contactData={clientData[0].contact} />
     </>
