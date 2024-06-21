@@ -173,6 +173,7 @@ export default async function Home({ props }) {
   return (
     <>
     <HeroSection/>
+    
       <Container className="pb-20 mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           {clientData[0].heroComponent?.heading && (
@@ -188,7 +189,8 @@ export default async function Home({ props }) {
         </FadeIn>
       </Container>
 
-      <Company/>
+      <Company clients={clientData[0].clients}/>
+
       
 
       <CaseStudies caseStudies={caseStudies} />
@@ -203,7 +205,7 @@ export default async function Home({ props }) {
         {clientData[0]?.testimonialData?.quote}
       </Testimonial>
 
-      <NewService/>
+      <NewService data={clientData[0].service}/>
 
       <ContactSection contactData={clientData[0].contact} />
     </>
