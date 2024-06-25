@@ -172,7 +172,7 @@ export default async function Home({ props }) {
 
   return (
     <>
-    <HeroSection/>
+    <HeroSection clients={clientData[0].seo}/>
     
       <Container className="pb-20 mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">

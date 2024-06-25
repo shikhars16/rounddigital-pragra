@@ -5,6 +5,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import appSS from '../images/appSS.png'
 import { applySourceDocuments } from '@sanity/client/csm'
+import { client, getPosts, urlFor } from '@/utils/sanity'
+
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -13,7 +15,7 @@ const navigation = [
   { name: 'Company', href: '#' },
 ]
 
-export default function HeroSection() {
+export default function HeroSection({ clients }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -31,10 +33,10 @@ export default function HeroSection() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h1 className="font-display text-4xl font-small tracking-tight text-[#e14242] [text-wrap:balance] sm:text-7xl">
-              Delivering top-notch Solutions to enhance your business.
+{clients.title}
               </h1>
               <p className="mt-6 text-lg leading-8 text-neutral-600">
-              We recognize the utmost importance of product quality for both businesses and consumers. Our meticulously crafted test suites offer comprehensive insights and coverage for all quality-related endeavors.
+              {clients.description}              
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
