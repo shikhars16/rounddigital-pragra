@@ -175,25 +175,9 @@ export default async function Home({ props }) {
   return (
     <>
     <HeroSection clients={clientData[0].seo}/>
-    
-      <Container className="pb-20 mt-24 sm:mt-32 md:mt-56">
-        <FadeIn className="max-w-3xl">
-          {clientData[0].heroComponent?.heading && (
-            <h1 className="font-display text-5xl font-medium tracking-tight text-[#e14242] [text-wrap:balance] sm:text-7xl">
-              {clientData[0].heroComponent.heading}
-            </h1>
-          )}
-          {clientData[0].heroComponent?.description && (
-            <p className="mt-6 text-xl text-neutral-600">
-              {clientData[0].heroComponent.description}
-            </p>
-          )}
-        </FadeIn>
-      </Container>
+   
 
       <Company clients={clientData[0].clients}/>
-
-      
 
       <CaseStudies caseStudies={caseStudies} />
 

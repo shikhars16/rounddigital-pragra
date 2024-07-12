@@ -4,7 +4,7 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import appSS from '../images/appSS.png'
-import Dashboard from '../images/Dashboard.png'
+import Dashboard from '../images/DashboardCopy.png'
 import { applySourceDocuments } from '@sanity/client/csm'
 import { client, getPosts, urlFor } from '@/utils/sanity'
 
@@ -20,7 +20,7 @@ export default function HeroSection({ clients }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="">
+    <div className="pb-20">
       
 
       <div className="relative isolate pt-2">
