@@ -22,6 +22,8 @@ import imageLaptop from '@/images/laptop.jpg'
 import { loadCaseStudies } from '@/lib/mdx'
 import { client, getPosts, urlFor } from '@/utils/sanity'
 import Company from '@/components/Companies'
+import NewestServices from '@/components/NewestServices'
+import NewestServices2 from '@/components/NewestServices2'
 // import { useEffect } from 'react'
 
 
@@ -205,7 +207,7 @@ export default async function Home({ props }) {
         {clientData[0]?.testimonialData?.quote}
       </Testimonial>
 
-      <NewService data={clientData[0].service}/>
+      <NewestServices data={clientData[0].service}/>
 
       <ContactSection contactData={clientData[0].contact} />
     </>

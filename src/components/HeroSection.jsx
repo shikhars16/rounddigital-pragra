@@ -4,6 +4,7 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import appSS from '../images/appSS.png'
+import Dashboard from '../images/Dashboard.png'
 import { applySourceDocuments } from '@sanity/client/csm'
 import { client, getPosts, urlFor } from '@/utils/sanity'
 
@@ -29,7 +30,7 @@ export default function HeroSection({ clients }) {
         >
           
         </div>
-        <div className="py-24 sm:py-32 lg:pb-20">
+        <div className="py-24 sm:py-32 lg:pb-5">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h1 className="font-display text-4xl font-small tracking-tight text-[#e14242] [text-wrap:balance] sm:text-7xl">
@@ -50,13 +51,14 @@ export default function HeroSection({ clients }) {
                 </a>
               </div>
             </div>
-            <Image
-              src={appSS}
-              alt="App screenshot"
-              width={2432}
-              height={1442}
-              className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-24"
-            />
+            <div className="flex justify-center mt-10 sm:mt-20">
+          <Image
+          src={Dashboard}
+          alt="App screenshot"
+          width={1500}
+          className="w-3/4 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+          />
+          </div>
           </div>
         </div>
       </div>
