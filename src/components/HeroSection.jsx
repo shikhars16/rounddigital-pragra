@@ -8,7 +8,6 @@ import Dashboard from '../images/DashboardCopy.png'
 import { applySourceDocuments } from '@sanity/client/csm'
 import { client, getPosts, urlFor } from '@/utils/sanity'
 
-
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
@@ -21,23 +20,20 @@ export default function HeroSection({ clients }) {
 
   return (
     <div className="pb-20">
-      
-
       <div className="relative isolate pt-2">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
         >
-          
         </div>
         <div className="py-24 sm:py-32 lg:pb-5">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center">
-              <h1 className="font-display text-4xl font-small tracking-tight text-[#e14242] [text-wrap:balance] sm:text-7xl">
-{clients.title}
+          <div className="mx-auto max-w-7xl ">
+            <div className="mx-auto max-w-3xl text-center">
+              <h1 className="font-display text-4xl font-small tracking-tight text-[#e14242] [text-wrap:balance] sm:text-7xl ">
+                {clients.title}
               </h1>
               <p className="mt-6 text-lg leading-8 text-neutral-600">
-              {clients.description}              
+                {clients.description}
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
@@ -52,13 +48,16 @@ export default function HeroSection({ clients }) {
               </div>
             </div>
             <div className="flex justify-center mt-10 sm:mt-20">
-          <Image
-          src={Dashboard}
-          alt="App screenshot"
-          width={1500}
-          className="w-3/4 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
-          />
-          </div>
+              <div className="relative w-full h-0 pb-[60%]"> {/* Adjust the padding-bottom value to control aspect ratio */}
+                <Image
+                  src={Dashboard}
+                  alt="App screenshot"
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -6,22 +6,7 @@ import { Logo } from '@/components/Logo'
 import { socialMediaProfiles } from '@/components/SocialMedia'
 
 const navigation = [
-  {
-    title: 'Work',
-    links: [
-      { title: 'FamilyFund', href: '/work/family-fund' },
-      { title: 'Unseal', href: '/work/unseal' },
-      { title: 'Phobia', href: '/work/phobia' },
-      {
-        title: (
-          <>
-            See all <span aria-hidden="true">&rarr;</span>
-          </>
-        ),
-        href: '/work',
-      },
-    ],
-  },
+ 
   {
     title: 'Company',
     links: [
@@ -40,7 +25,7 @@ const navigation = [
 function Navigation() {
   return (
     <nav>
-      <ul role="list" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+      <ul role="list" className="pl-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
         {navigation.map((section, sectionIndex) => (
           <li key={sectionIndex}>
             <div className="font-display text-sm font-semibold tracking-wider text-[#e14242]">
