@@ -38,7 +38,7 @@ function Clients({ clients }) {
               {clients.heading}
             </h2>
           )}
-          <div className="h-px flex-auto bg-neutral-800" />
+          <div className="flex-auto bg-neutral-800" />
         </FadeIn>
         <FadeInStagger faster>
           <ul
