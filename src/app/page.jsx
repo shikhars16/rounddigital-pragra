@@ -79,7 +79,7 @@ function CaseStudies({ caseStudies }) {
       >
         {caseStudiesData?.description && <p>{caseStudiesData.description}</p>}
       </SectionIntro>
-      <Container className="mt-16">
+      <Container className="mt-16 pb-20 pt-10">
         <FadeInStagger className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {caseStudies.map((caseStudy) => (
             <FadeIn key={caseStudy.href} className="flex">
@@ -181,6 +181,10 @@ export default async function Home({ props }) {
 
       <CaseStudies caseStudies={caseStudies} />
 
+     
+
+      <NewestServices data={clientData[0].service}/>
+
       <Testimonial
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{
@@ -190,8 +194,6 @@ export default async function Home({ props }) {
       >
         {clientData[0]?.testimonialData?.quote}
       </Testimonial>
-
-      <NewestServices data={clientData[0].service}/>
 
       <ContactSection contactData={clientData[0].contact} />
     </>
