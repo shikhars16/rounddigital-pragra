@@ -21,7 +21,7 @@ export default function NewestServices2({ data }) {
                     </div>
                     {feature.title}
                   </dt>
-                  <dd className="text-base leading-7 text-gray-600">{feature.description}</dd>
+                  <dd className="mt-1 text-base leading-7 text-gray-600">{feature.description}</dd>
                 </div>
               )
             })}

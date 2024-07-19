@@ -29,7 +29,7 @@ const cards = [
 
 export default function NewService({data}) {
   return (
-    <div className="relative isolate overflow-hidden bg-white">
+    <div className="relative isolate overflow-hidden bg-white sm:py-32">
       <Image
         src={laptopBackground}
         alt=""
