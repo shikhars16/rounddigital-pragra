@@ -24,9 +24,15 @@ import { client, getPosts, urlFor } from '@/utils/sanity'
 import Company from '@/components/Companies'
 import NewestServices from '@/components/NewestServices'
 import NewestServices2 from '@/components/NewestServices2'
+import { Roboto } from 'next/font/google'
+
 // import { useEffect } from 'react'
 
-
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
+ 
 
 function Clients({ clients }) {
   return (
@@ -174,7 +180,8 @@ export default async function Home({ props }) {
 
   return (
     <>
-    <HeroSection clients={clientData[0].seo}/>
+    <main className={roboto.className}>
+    <HeroSection className="font-roboto" clients={clientData[0].seo}/>
    
 
       <Company clients={clientData[0].clients}/>
@@ -182,7 +189,6 @@ export default async function Home({ props }) {
       <CaseStudies caseStudies={caseStudies} />
 
      
-
       <NewestServices data={clientData[0].service}/>
 
       <Testimonial
@@ -196,6 +202,7 @@ export default async function Home({ props }) {
       </Testimonial>
 
       <ContactSection contactData={clientData[0].contact} />
+      </main>
     </>
   )
 }
