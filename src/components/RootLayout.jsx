@@ -135,9 +135,7 @@ function Navigation() {
         <NavigationItem href="/process">Our Process</NavigationItem>
         <NavigationItem href="/blog">Blog</NavigationItem>
       </NavigationRow>
-      <NavigationRow>
-        <NavigationItem href="/login">Login</NavigationItem>
-      </NavigationRow>
+
     </nav>
   )
 }
@@ -217,21 +215,7 @@ function RootLayoutInner({ children }) {
               />
             </div>
             <Navigation />
-            <div className="relative bg-[#e14242] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
-              <Container>
-                <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
-                  <div>
-                    
-                    <Offices
-                      invert
-                      className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2"
-                    />
-                  </div>
-                  <div className="sm:border-l sm:border-transparent sm:pl-16">
-                  </div>
-                </div>
-              </Container>
-            </div>
+            
           </motion.div>
         </motion.div>
       </header>
