@@ -186,7 +186,7 @@ export default async function Home({ props }) {
       <NewestServices data={clientData[0].service}/>
 
       <Testimonial
-        className="mt-24 sm:mt-32 lg:mt-40"
+        className=""
         client={{
           name: clientData[0]?.testimonialData?.name,
           logo: urlFor(clientData[0].testimonialData.logo).url(),

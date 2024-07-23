@@ -19,7 +19,7 @@ export default function HeroSection({ clients }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 ">
       <div className="relative isolate pt-2">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
