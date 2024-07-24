@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <html lang="en" className="h-full  text-base antialiased">
+    <html lang="en" className="h-full text-base antialiased">
     <Head>
     <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"

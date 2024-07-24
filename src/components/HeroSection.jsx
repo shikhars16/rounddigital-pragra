@@ -37,14 +37,12 @@ export default function HeroSection({ clients }) {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
-                  href="#"
+                  href="/contact"
                   className="rounded-md bg-[#E14344] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
                 >
                   Get started
                 </a>
-                <a href="#" className="text-sm font-semibold leading-6 text-[#E14344]">
-                  Learn more <span aria-hidden="true">→</span>
-                </a>
+                
               </div>
             </div>
             <div className="flex justify-center mt-10 sm:mt-20">
